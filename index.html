@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم استخدام - شرکت آب معدنی ساری باوا</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tahoma', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-right: 5px solid #3498db;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: "📋";
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-row.single {
+            grid-template-columns: 1fr;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-item:hover {
+            border-color: #3498db;
+            background: #f0f8ff;
+        }
+
+        .radio-item input[type="radio"] {
+            width: auto;
+            margin: 0;
+            accent-color: #3498db;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            accent-color: #3498db;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            border: 2px dashed #3498db;
+            border-radius: 10px;
+            background: #f0f8ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .file-upload-label:hover {
+            background: #e6f3ff;
+            border-color: #2980b9;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3);
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin: 10px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+            }
+        }
+
+        .position-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .position-card {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .position-card:hover {
+            border-color: #3498db;
+            background: #f0f8ff;
+        }
+
+        .position-card.selected {
+            border-color: #3498db;
+            background: #f0f8ff;
+        }
+
+        .position-card input[type="radio"] {
+            display: none;
+        }
+
+        .position-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏭 شرکت آب معدنی ساری باوا</h1>
+            <p>فرم درخواست استخدام - موقعیت‌های شغلی جدید</p>
+        </div>
+
+        <div class="form-container">
+            <form id="jobApplicationForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+                <!-- اطلاعات شخصی -->
+                <div class="section">
+                    <h2 class="section-title">اطلاعات شخصی</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">نام <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">نام خانوادگی <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fatherName">نام پدر</label>
+                            <input type="text" id="fatherName" name="fatherName">
+                        </div>
+                        <div class="form-group">
+                            <label for="nationalId">کد ملی <span class="required">*</span></label>
+                            <input type="text" id="nationalId" name="nationalId" pattern="[0-9]{10}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="birthDate">تاریخ تولد <span class="required">*</span></label>
+                            <input type="date" id="birthDate" name="birthDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">جنسیت <span class="required">*</span></label>
+                            <select id="gender" name="gender" required>
+                                <option value="">انتخاب کنید</option>
+                                <option value="male">مرد</option>
+                                <option value="female">زن</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="maritalStatus">وضعیت تأهل</label>
+                            <select id="maritalStatus" name="maritalStatus">
+                                <option value="">انتخاب کنید</option>
+                                <option value="single">مجرد</option>
+                                <option value="married">متأهل</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="militaryStatus">وضعیت نظام وظیفه (مردان)</label>
+                            <select id="militaryStatus" name="militaryStatus">
+                                <option value="">انتخاب کنید</option>
+                                <option value="completed">پایان خدمت</option>
+                                <option value="exempt">معافیت</option>
+                                <option value="student">معافیت تحصیلی</option>
+                                <option value="not_applicable">مربوط نمی‌شود</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- اطلاعات تماس -->
+                <div class="section">
+                    <h2 class="section-title">اطلاعات تماس</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">شماره موبایل <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="homePhone">تلفن منزل</label>
+                            <input type="tel" id="homePhone" name="homePhone">
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label for="email">ایمیل</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label for="address">آدرس کامل <span class="required">*</span></label>
+                            <textarea id="address" name="address" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">شهر <span class="required">*</span></label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="province">استان <span class="required">*</span></label>
+                            <input type="text" id="province" name="province" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- موقعیت شغلی -->
+                <div class="section">
+                    <h2 class="section-title">موقعیت شغلی مورد نظر</h2>
+                    <div class="form-group">
+                        <label>سمت مورد درخواست <span class="required">*</span></label>
+                        <div class="position-cards">
+                            <div class="position-card" onclick="selectPosition('technical')">
+                                <div class="position-icon">🔧</div>
+                                <input type="radio" name="position" value="technical" required>
+                                <h4>کارگر فنی</h4>
+                                <p>تعمیر و نگهداری تجهیزات</p>
+                            </div>
+                            <div class="position-card" onclick="selectPosition('warehouse')">
+                                <div class="position-icon">📦</div>
+                                <input type="radio" name="position" value="warehouse" required>
+                                <h4>انباردار</h4>
+                                <p>مدیریت انبار و موجودی</p>
+                            </div>
+                            <div class="position-card" onclick="selectPosition('sales')">
+                                <div class="position-icon">📊</div>
+                                <input type="radio" name="position" value="sales" required>
+                                <h4>مدیر فروش</h4>
+                                <p>توسعه فروش و بازاریابی</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expectedSalary">حقوق مورد انتظار (تومان)</label>
+                            <input type="number" id="expectedSalary" name="expectedSalary">
+                        </div>
+                        <div class="form-group">
+                            <label for="startDate">تاریخ شروع به کار</label>
+                            <input type="date" id="startDate" name="startDate">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تحصیلات -->
+                <div class="section">
+                    <h2 class="section-title">سوابق تحصیلی</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="education">آخرین مدرک تحصیلی <span class="required">*</span></label>
+                            <select id="education" name="education" required>
+                                <option value="">انتخاب کنید</option>
+                                <option value="elementary">ابتدایی</option>
+                                <option value="middle_school">راهنمایی</option>
+                                <option value="high_school">دبیرستان</option>
+                                <option value="diploma">دیپلم</option>
+                                <option value="associate">کاردانی</option>
+                                <option value="bachelor">کارشناسی</option>
+                                <option value="master">کارشناسی ارشد</option>
+                                <option value="phd">دکتری</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="major">رشته تحصیلی</label>
+                            <input type="text" id="major" name="major">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="university">نام مؤسسه آموزشی</label>
+                            <input type="text" id="university" name="university">
+                        </div>
+                        <div class="form-group">
+                            <label for="graduationYear">سال فارغ‌التحصیلی</label>
+                            <input type="number" id="graduationYear" name="graduationYear" min="1350" max="1405">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- سوابق کاری -->
+                <div class="section">
+                    <h2 class="section-title">سوابق کاری</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="workExperience">سابقه کار (سال)</label>
+                            <input type="number" id="workExperience" name="workExperience" min="0" max="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastJobTitle">آخرین سمت شغلی</label>
+                            <input type="text" id="lastJobTitle" name="lastJobTitle">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lastCompany">نام آخرین شرکت</label>
+                            <input type="text" id="lastCompany" name="lastCompany">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastSalary">آخرین حقوق (تومان)</label>
+                            <input type="number" id="lastSalary" name="lastSalary">
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label for="workDescription">شرح مسئولیت‌ها و دستاوردهای کاری</label>
+                            <textarea id="workDescription" name="workDescription" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- مهارت‌ها -->
+                <div class="section">
+                    <h2 class="section-title">مهارت‌ها و توانایی‌ها</h2>
+                    <div class="form-group">
+                        <label>مهارت‌های کامپیوتری</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="word" name="computerSkills" value="word">
+                                <label for="word">Word</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="excel" name="computerSkills" value="excel">
+                                <label for="excel">Excel</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="internet" name="computerSkills" value="internet">
+                                <label for="internet">اینترنت</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="accounting" name="computerSkills" value="accounting">
+                                <label for="accounting">نرم‌افزار حسابداری</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="languages">زبان‌های خارجی</label>
+                            <input type="text" id="languages" name="languages" placeholder="مثال: انگلیسی - متوسط، عربی - مبتدی">
+                        </div>
+                        <div class="form-group">
+                            <label for="drivingLicense">گواهینامه رانندگی</label>
+                            <select id="drivingLicense" name="drivingLicense">
+                                <option value="">انتخاب کنید</option>
+                                <option value="none">ندارم</option>
+                                <option value="motorcycle">موتورسیکلت</option>
+                                <option value="car">خودرو</option>
+                                <option value="both">هر دو</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label for="otherSkills">سایر مهارت‌ها و توانایی‌ها</label>
+                            <textarea id="otherSkills" name="otherSkills" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- مراجع -->
+                <div class="section">
+                    <h2 class="section-title">مراجع</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reference1Name">نام مرجع اول</label>
+                            <input type="text" id="reference1Name" name="reference1Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="reference1Phone">شماره تماس مرجع اول</label>
+                            <input type="tel" id="reference1Phone" name="reference1Phone">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reference1Relation">نسبت با مرجع اول</label>
+                            <input type="text" id="reference1Relation" name="reference1Relation" placeholder="مثال: مدیر قبلی، همکار">
+                        </div>
+                        <div class="form-group">
+                            <label for="reference2Name">نام مرجع دوم</label>
+                            <input type="text" id="reference2Name" name="reference2Name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reference2Phone">شماره تماس مرجع دوم</label>
+                            <input type="tel" id="reference2Phone" name="reference2Phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="reference2Relation">نسبت با مرجع دوم</label>
+                            <input type="text" id="reference2Relation" name="reference2Relation">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- آپلود فایل -->
+                <div class="section">
+                    <h2 class="section-title">مدارک و رزومه</h2>
+                    <div class="form-group">
+                        <label for="resume">آپلود رزومه (PDF, DOC, DOCX)</label>
+                        <div class="file-upload">
+                            <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+                            <div class="file-upload-label">
+                                <span>📄</span>
+                                <span>فایل رزومه خود را انتخاب کنید</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- توضیحات اضافی -->
+                <div class="section">
+                    <h2 class="section-title">اطلاعات تکمیلی</h2>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label for="motivation">انگیزه شما برای همکاری با شرکت ساری باوا چیست؟</label>
+                            <textarea id="motivation" name="motivation" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label for="additionalInfo">توضیحات اضافی</label>
+                            <textarea id="additionalInfo" name="additionalInfo" rows="3" placeholder="هر اطلاعاتی که فکر می‌کنید مفید باشد..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">ارسال درخواست استخدام</button>
+                
+                <div id="successMessage" class="success-message">
+                    ✅ درخواست شما با موفقیت ارسال شد! ما در اسرع وقت با شما تماس خواهیم گرفت.
+                </div>
+                
+                <!-- Hidden fields for form identification -->
+                <input type="hidden" name="_subject" value="درخواست استخدام جدید - شرکت ساری باوا">
+                <input type="hidden" name="_next" value="https://your-website.com/thank-you.html">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function selectPosition(position) {
+            // Remove selected class from all cards
+            const cards = document.querySelectorAll('.position-card');
+            cards.forEach(card => card.classList.remove('selected'));
+            
+            // Add selected class to clicked card
+            event.currentTarget.classList.add('selected');
+            
+            // Select the radio button
+            const radio = event.currentTarget.querySelector('input[type="radio"]');
+            radio.checked = true;
+        }
+
+        // Handle file upload display
+        document.getElementById('resume').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name;
+            const label = document.querySelector('.file-upload-label span:last-child');
+            if (fileName) {
+                label.textContent = `فایل انتخاب شده: ${fileName}`;
+            } else {
+                label.textContent = 'فایل رزومه خود را انتخاب کنید';
+            }
+        });
+
+        // Form submission handler
+        document.getElementById('jobApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'در حال ارسال...';
+            submitBtn.disabled = true;
+            
+            // Collect checkbox values
+            const computerSkills = [];
+            document.querySelectorAll('input[name="computerSkills"]:checked').forEach(cb => {
+                computerSkills.push(cb.value);
+            });
+            
+            // Create form data
+            const formData = new FormData(this);
+            formData.append('computerSkillsList', computerSkills.join(', '));
+            formData.append('submissionDate', new Date().toLocaleString('fa-IR'));
+            
+            // Submit to Formspree
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Success
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                    this.reset();
+                    document.querySelectorAll('.position-card').forEach(card => card.classList.remove('selected'));
+                    document.querySelector('.file-upload-label span:last-child').textContent = 'فایل رزومه خود را انتخاب کنید';
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            }).catch(error => {
+                alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
+                console.error('Error:', error);
+            }).finally(() => {
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
